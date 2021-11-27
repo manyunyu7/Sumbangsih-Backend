@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Helper;
+use App\Helper\RazkyFeb;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -20,27 +21,25 @@ class CustomAuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','check-number']]);
     }
 
     /**
      * Get a JWT via given credentials.
      *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function login()
     {
-        $credentials = request(['email', 'password']);
+        $credentials = request(['contact', 'password']);
 
         if (!$token = JWTAuth::attempt($credentials)) {
-            $myresponse = array(
-                "status_code" => 0,
-                "messages" => "Username atau password tidak sesuai",
-                "messages_en" => "credential didnt match",
-                "errors" => "credential error"
-            );
 
-            return response()->json($myresponse, 401);
+            return RazkyFeb::responseErrorWithData(401,0,0,
+            "Username atau Password Tidak Sesuai",
+            "Credential didnt match","");
+
+
+//            return response()->json($myresponse, 401);
         }
 
         return $this->respondWithToken($token, "");

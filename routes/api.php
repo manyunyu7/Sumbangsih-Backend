@@ -29,6 +29,11 @@ Route::group([
 });
 
 Route::post('auth/register', 'CustomAuthController@register');
+Route::get('auth/check-number', 'StaffController@checkIfNumberRegistered');
+
+Route::prefix('news')->group(function () {
+    Route::get('/get', 'NewsController@get');
+});
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::prefix('user')->group(function () {
@@ -37,9 +42,7 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/change-password', 'StaffController@updatePassword');
     });
 
-    Route::prefix('news')->group(function () {
-        Route::get('/get', 'NewsController@get');
-    });
+
 
     Route::prefix('mnotification')->group(function () {
         Route::get('get', 'MNotificationController@getByUser');

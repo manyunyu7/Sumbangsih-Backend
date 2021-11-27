@@ -11,6 +11,19 @@ use Illuminate\Support\Facades\Hash;
 class StaffController extends Controller
 {
 
+    public function checkIfNumberRegistered(Request $request)
+    {
+        $number = $request->number;
+        $findNumber = User::where('contact', '=', $number);
+
+        if ($findNumber != null) {
+            return RazkyFeb::responseSuccessWithData(200, 1, 1,
+                "Success", "Success", $findNumber->get());
+        } else {
+            return RazkyFeb::responseErrorWithData(400, 0, 0,
+                "Nomor Tidak Ditemukan", "Number Not Found", "");
+        }
+    }
 
     public function viewAdminManage()
     {
