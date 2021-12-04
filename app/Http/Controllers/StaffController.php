@@ -14,14 +14,14 @@ class StaffController extends Controller
     public function checkIfNumberRegistered(Request $request)
     {
         $number = $request->number;
-        $findNumber = User::where('contact', '=', $number);
+        $findNumber = User::where('contact', '=', $number)->first();
 
         if ($findNumber != null) {
-            return RazkyFeb::responseSuccessWithData(200, 1, 1,
-                "Success", "Success", $findNumber->get());
+            return RazkyFeb::responseErrorWithData(200, 1, 1,
+                "Nomor Ditemukan", "Number Found", $findNumber);
         } else {
-            return RazkyFeb::responseErrorWithData(400, 0, 0,
-                "Nomor Tidak Ditemukan", "Number Not Found", "");
+            return RazkyFeb::responseErrorWithData(200, 0, 0,
+                "Nomor Tidak Ditemukan", "Number Not Found", null);
         }
     }
 
@@ -328,6 +328,42 @@ class StaffController extends Controller
                         ""
                     );
                 return back()->with(["errors" => "Gagal Mengupdate Password"]);
+            }
+        }
+    }
+
+    function registerNumber(Request $request)
+    {
+        $validateComponent = [
+            "user_contact" => "required",
+            "user_password" => "required",
+        ];
+
+        $this->validate($request, $validateComponent);
+
+        $role = "";
+
+        if ($request->user_role == "" || $request->user_role == null) {
+            $role = 3;
+        }
+
+        $user = new User();
+        $user->contact = $request->user_contact;
+        $user->password = bcrypt($request->user_password);
+        $user->role = $role;
+
+        if ($user->save()) {
+            $url = url('/login');
+            if (RazkyFeb::isAPI()) {
+                return RazkyFeb::success(200, $user->contact, 1, 1);
+            } else {
+                return back()->with(["success" => "Berhasil Mendaftar, Silakan Login Menggunakan Akun Anda  <a href='$url'> Disini</a > "]);
+            }
+        } else {
+            if (RazkyFeb::isAPI()) {
+                return RazkyFeb::error(400, "Gagal Menambahkan User");
+            } else {
+                return back()->with(["failed" => "Gagal Menambahkan User Baru"]);
             }
         }
     }

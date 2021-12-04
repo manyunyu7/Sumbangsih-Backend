@@ -42,6 +42,22 @@ class RazkyFeb
         return response($response, $http_code);
     }
 
+    public static function responseSuccessWithData_2(
+        $http_code, $status_code, $api_code, $message_id, $message_en, $res_data_param, $res_data
+    )
+    {
+        $response = [
+            'http_response' => $http_code,
+            'status_code' => $status_code,
+            'api_code' => $api_code,
+            'message_id' => $message_id,
+            'message_en' => $message_en,
+            $res_data_param => $res_data,
+        ];
+
+        return response($response, $http_code);
+    }
+
     public static function responseErrorWithData(
         $http_code, $status_code, $api_code, $message_id, $message_en, $res_data
     )
@@ -72,16 +88,19 @@ class RazkyFeb
         // }
     }
 
-    public static function logout(){
+    public static function logout()
+    {
         return response()->json(['error' => 'Unauthenticated.'], 401);
     }
 
-    public static function error($code,$message){
+    public static function error($code, $message)
+    {
         return response()->json(['message' => "$message"], $code);
     }
 
-    public static function success($code,$message){
-        return response()->json(['message' => "$message"], $code);
+    public static function success($httpCode, $message, $status_code, $api_code)
+    {
+        return response()->json(['message' => "$message", "status_code" => $status_code, $api_code], $httpCode);
     }
 
     public static function checkApiKey($key)

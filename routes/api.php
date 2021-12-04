@@ -35,13 +35,16 @@ Route::prefix('news')->group(function () {
     Route::get('/get', 'NewsController@get');
 });
 
+Route::get('/colek-service', 'ColekController@colek');
+Route::get('/auth/colek', 'ColekController@colek');
+Route::post('/auth/registerNumber', 'StaffController@registerNumber');
+
 Route::group(['middleware' => ['auth:api']], function () {
     Route::prefix('user')->group(function () {
         Route::post('/update-photo', 'StaffController@updateProfilePhoto');
         Route::post('/update-data', 'StaffController@update');
         Route::post('/change-password', 'StaffController@updatePassword');
     });
-
 
 
     Route::prefix('mnotification')->group(function () {
