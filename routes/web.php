@@ -18,7 +18,7 @@ Route::get('/landing', function () {
     return view('index');
 })->name('landing');
 
-Route::redirect('/', '/landing');
+Route::redirect('/', '/login');
 
 Route::view('/template/home', 'template');
 
@@ -26,6 +26,7 @@ Auth::routes();
 
 
 Route::get('/registerz', 'CustomAuthController@register');
+Route::post('/proceedLogin', 'Auth\LoginController@proceedLogin');
 
 Route::get('/artisan/dropDonasi', 'ArtisanController@dropDonasi');
 Route::get('/artisan/drop', 'ArtisanController@drop');

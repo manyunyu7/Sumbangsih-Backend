@@ -303,9 +303,7 @@ class StaffController extends Controller
             return back()->with(["errors" => "Password Lama Tidak Sesuai"]);
         } else {
             $user->password = Hash::make($request->new_password);
-            $user->save();
-
-            if ($user) {
+            if ($user->save()) {
                 if ($request->is('api/*'))
                     return RazkyFeb::responseSuccessWithData(
                         200,

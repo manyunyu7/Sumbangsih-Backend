@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ url('proceedLogin') }}">
             @csrf
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
@@ -27,10 +27,8 @@
                             </div>
 
 
-                            <div class="form-group mt-3">
-
+                            <div class="form-group mt-3 mb-3" >
                                 @if ($errors->any())
-
                                     <div class="alert">
                                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                                         {!! implode('', $errors->all('<div>:message</div>')) !!}
@@ -38,9 +36,9 @@
                                 @endif
                             </div>
 
-                            <div class="form-group mt-3">
-                                <input id="username" aria-labelledby="label_uname" name="email" type="text" class="form-control" required>
-                                <label id="label_uname" class="form-control-placeholder" for="username">Email</label>
+                            <div class="form-group mt-3" style="margin-top: 20px">
+                                <input id="username" aria-labelledby="label_uname" name="contact" value="{{old('contact')}}" type="text" class="form-control" required>
+                                <label id="label_uname" class="form-control-placeholder" for="username">No Telepon</label>
                             </div>
 
                             <div class="form-group">
