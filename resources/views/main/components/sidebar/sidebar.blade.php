@@ -47,6 +47,24 @@
                         </span>
                         </a>
                     </li>
+
+                    <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">DATA KTP</span></li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('ktp/create') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Tambah KTP
+                        </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('ktp/manage') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Manage KTP
+                        </span>
+                        </a>
+                    </li>
                 @endif
 
                 <li class="list-divider"></li>

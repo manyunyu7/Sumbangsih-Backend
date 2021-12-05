@@ -9,6 +9,7 @@
 /public/web_files/expenses/*
 /public/web_files/user_profile/*
 /public/web_files/doc/*
+/public/web_files/ktp/*
 /storage/*.key
 /vendor
 .env
