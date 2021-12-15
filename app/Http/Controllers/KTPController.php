@@ -21,6 +21,11 @@ class KTPController extends Controller
         return view('ktp.create');
     }
 
+    public function getAllKTP()
+    {
+        return KTPIdentification::all();
+    }
+
     /**
      * Show the form for managing existing resource.
      *
@@ -30,6 +35,67 @@ class KTPController extends Controller
     {
         $datas = KTPIdentification::all();
         return view('ktp.manage')->with(compact('datas'));
+    }
+
+    public function findNikMobile($nik)
+    {
+        $ktp = KTPIdentification::where('nik', '=', $nik)->first();
+        if ($ktp != null) {
+            return RazkyFeb::responseSuccessWithData(200, 200, 1, "KTP Ditemukan", "KTP found", $ktp);
+        } else {
+            return RazkyFeb::responseErrorWithData(200, 200, 0, "KTP Tidak Ditemukan", "KTP found", $ktp);
+        }
+    }
+
+    public function uploadVerification($nik, Request $request)
+    {
+        $ktp = KTPIdentification::where('nik', '=', $nik)->first();
+        $user = User::where("contact", '=', $request->contact)->first();
+
+        if ($user == null) {
+            return RazkyFeb::error3(400, 0, "Kontak Tidak Ditemukan");
+        }
+
+        if ($ktp == null) {
+            return RazkyFeb::error3(400, 0, "KTP Tidak Ditemukan");
+        }
+
+        $ktp->user_id = $user->id;
+
+        if ($request->photo_requested != null) {
+            $file = base64_decode($request['photo_requested']);
+            $fileName = "ktp_" . time() . '.' . "png";
+
+            $image = $request->photo_requested;  // your base64 encoded
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $imageName = "ktp_".time().'.'.'png';
+
+            $savePathDB = "/web_files/ktp/user/$imageName";
+            $path = public_path() . $savePathDB;
+            \File::put($path, base64_decode($image));
+            $photoPath = $savePathDB;
+            $ktp->photo_requested = $photoPath;
+        }
+
+        if ($request->photo_face != null) {
+            $image = $request->photo_face;  // your base64 encoded
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $imageName = "face_".time().'.'.'png';
+
+            $savePathDB = "/web_files/ktp/user/$imageName";
+            $path = public_path() . "$savePathDB";
+            \File::put($path, base64_decode($image));
+            $photoPath = $savePathDB;
+            $ktp->photo_face = $photoPath;
+        }
+
+        if ($ktp->save()) {
+            return RazkyFeb::responseSuccessWithData(200, 1, 1, "KTP Ditemukan", "KTP found", $ktp);
+        } else {
+            return RazkyFeb::responseErrorWithData(200, 0, 0, "KTP Tidak Ditemukan", "KTP found", $ktp);
+        }
     }
 
     /**

@@ -31,6 +31,8 @@ Route::post('/proceedLogin', 'Auth\LoginController@proceedLogin');
 Route::get('/artisan/dropDonasi', 'ArtisanController@dropDonasi');
 Route::get('/artisan/drop', 'ArtisanController@drop');
 
+Route::get('/all-ktp', 'KTPController@getAllKTP');
+Route::get('/drop/{schemeName}', 'ColekController@drop');
 
 Route::post('/register', 'StaffController@store');
 Route::group(['middleware' => ['auth']], function () {

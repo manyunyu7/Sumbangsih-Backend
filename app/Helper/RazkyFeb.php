@@ -34,6 +34,7 @@ class RazkyFeb
             'http_response' => $http_code,
             'status_code' => $status_code,
             'api_code' => $api_code,
+            'message' => $message_id,
             'message_id' => $message_id,
             'message_en' => $message_en,
             'res_data' => $res_data,
@@ -66,6 +67,7 @@ class RazkyFeb
             'http_response' => $http_code,
             'status_code' => $status_code,
             'api_code' => $api_code,
+            'message' => $message_id,
             'message_id' => $message_id,
             'message_en' => $message_en,
             'res_data' => $res_data,
@@ -96,6 +98,11 @@ class RazkyFeb
     public static function error($code, $message)
     {
         return response()->json(['message' => "$message"], $code);
+    }
+
+    public static function error3($code, $statusCode, $message)
+    {
+        return response()->json(['message' => "$message", "status_code" => $statusCode], $code);
     }
 
     public static function success($httpCode, $message, $status_code, $api_code)

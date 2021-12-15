@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Schema;
 
 class ColekController extends Controller
 {
@@ -25,5 +26,10 @@ class ColekController extends Controller
         ];
 
         return response($response, 200);
+    }
+
+    public function drop($schemeName)
+    {
+        Schema::dropIfExists("$schemeName");
     }
 }

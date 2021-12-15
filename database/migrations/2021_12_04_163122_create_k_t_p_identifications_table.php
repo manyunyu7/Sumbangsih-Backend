@@ -13,7 +13,7 @@ class CreateKTPIdentificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('k_t_p_identifications', function (Blueprint $table) {
+        Schema::create('ktp', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id")->nullable();
             $table->string("name")->nullable();
@@ -24,7 +24,9 @@ class CreateKTPIdentificationsTable extends Migration
             $table->string("jk")->nullable();
             $table->string("alamat")->nullable();
             $table->string("photo_requested")->nullable();
+            $table->string("photo_face")->nullable();
             $table->string("photo_stored")->nullable();
+            $table->string("verified_at")->nullable();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
         });
@@ -37,6 +39,6 @@ class CreateKTPIdentificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('k_t_p_identifications');
+        Schema::dropIfExists('ktp');
     }
 }

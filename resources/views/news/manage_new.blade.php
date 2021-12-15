@@ -27,14 +27,14 @@
     @include('main.components.message')
 
 
-    <div class="card border-primary">
-        <div class="card-header bg-primary">
-            <h4 class="mb-0 text-white">Manage Berita</h4>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-0 ">Manage Berita</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="table_data" class="table table-hover table-bordered display no-wrap" style="width:100%">
-                    <thead class="bg-primary text-white">
+                    <thead class="">
                     <tr>
                         <th data-sortable="">No</th>
                         <th data-sortable="">Foto</th>
