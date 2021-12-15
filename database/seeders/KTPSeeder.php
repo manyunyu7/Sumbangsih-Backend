@@ -22,7 +22,6 @@ class KTPSeeder extends Seeder
                 $nik = $faker->numberBetween(000000000001, 900000000000);
                 $no_kk = $faker->numberBetween(100000000000, 190000000000);
                 $jk = $faker->numberBetween(1, 2);
-
                 $this->insert($faker->name, $date, $faker->state, $nik,$no_kk, $jk, $faker->address);
             } catch (Exception $exception) {
                 continue;
@@ -40,6 +39,7 @@ class KTPSeeder extends Seeder
         $data->birth_place = $birth_place;
         $data->nik = $nik;
         $data->no_kk = $no_kk;
+        $data->jk = $jk;
         $data->alamat = $alamat;
         $data->save();
     }
