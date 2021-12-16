@@ -26,7 +26,10 @@ class CreateKTPIdentificationsTable extends Migration
             $table->string("photo_requested")->nullable();
             $table->string("photo_face")->nullable();
             $table->string("photo_stored")->nullable();
+            $table->string("lat")->nullable();
+            $table->string("long")->nullable();
             $table->string("verified_at")->nullable();
+            $table->string("verification_status")->nullable();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
         });

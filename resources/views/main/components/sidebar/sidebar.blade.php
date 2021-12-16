@@ -30,6 +30,7 @@
                         </a>
                     </li>
 
+
                     <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">Konten</span></li>
 
@@ -48,6 +49,7 @@
                         </a>
                     </li>
 
+
                     <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">DATA KTP</span></li>
 
@@ -65,6 +67,26 @@
                         </span>
                         </a>
                     </li>
+
+                    <li class="list-divider"></li>
+
+                    <li class="nav-small-cap"><span class="hide-menu">Kegiatan Sumbangsih</span></li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('/bansos-event/create') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Tambah Kegiatan
+                            </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('/bansos-event/manage') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Manage Kegiatan
+                            </span>
+                        </a>
+                    </li>
+
                 @endif
 
                 <li class="list-divider"></li>
