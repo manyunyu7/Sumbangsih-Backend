@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\RazkyFeb;
+use App\Models\KTPIdentification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -330,6 +331,17 @@ class StaffController extends Controller
         }
     }
 
+    function profile(Request $request, $id)
+    {
+
+        $data = array(
+            "user" => User::find($id),
+            "ktp" => KTPIdentification::where("user_id", "=", $id)->first()
+        );
+        return RazkyFeb::responseSuccessWithData(200, 1, 1, "Berhasil", "Success", $data);
+
+    }
+
     function registerNumber(Request $request)
     {
         $validateComponent = [
@@ -352,8 +364,12 @@ class StaffController extends Controller
 
         if ($user->save()) {
             $url = url('/login');
+            $data = array(
+                "id" => $user->id,
+                "number" => $user->contact
+            );
             if (RazkyFeb::isAPI()) {
-                return RazkyFeb::success(200, $user->contact, 1, 1);
+                return RazkyFeb::responseSuccessWithData(200, 1, 1, "Success", "Success", $data);
             } else {
                 return back()->with(["success" => "Berhasil Mendaftar, Silakan Login Menggunakan Akun Anda  <a href='$url'> Disini</a > "]);
             }

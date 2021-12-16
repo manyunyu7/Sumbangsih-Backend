@@ -69,7 +69,7 @@ class KTPController extends Controller
             $image = $request->photo_requested;  // your base64 encoded
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
-            $imageName = "ktp_".time().'.'.'png';
+            $imageName = "ktp_" . $user->id . '.' . 'png';
 
             $savePathDB = "/web_files/ktp/user/$imageName";
             $path = public_path() . $savePathDB;
@@ -82,7 +82,7 @@ class KTPController extends Controller
             $image = $request->photo_face;  // your base64 encoded
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
-            $imageName = "face_".time().'.'.'png';
+            $imageName = "face_" . $user->id . '.' . 'png';
 
             $savePathDB = "/web_files/ktp/user/$imageName";
             $path = public_path() . "$savePathDB";
@@ -92,9 +92,9 @@ class KTPController extends Controller
         }
 
         if ($ktp->save()) {
-            return RazkyFeb::responseSuccessWithData(200, 1, 1, "KTP Ditemukan", "KTP found", $ktp);
+            return RazkyFeb::responseSuccessWithData(200, 1, 1, "Verifikasi Berhasil Dikirim", "KTP found", $ktp);
         } else {
-            return RazkyFeb::responseErrorWithData(200, 0, 0, "KTP Tidak Ditemukan", "KTP found", $ktp);
+            return RazkyFeb::responseErrorWithData(200, 0, 0, "Verifikasi Gagal Dilakukan", "KTP found", $ktp);
         }
     }
 

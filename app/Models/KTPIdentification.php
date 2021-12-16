@@ -12,7 +12,7 @@ class KTPIdentification extends Model
     protected $table = "ktp";
 
     function getUserDetailAttribute(){
-        return User::find($this->user_id);
+        return "";
     }
 
 }

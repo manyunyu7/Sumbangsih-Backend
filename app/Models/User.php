@@ -33,15 +33,29 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
-    protected $appends = ['photo_path','role_desc'];
+    protected $appends = ['photo_path', 'role_desc', 'ktp_data'];
 
-    function getPhotoPathAttribute(){
+    function getPhotoPathAttribute()
+    {
         return asset($this->photo);
     }
 
-    function getRoleDescAttribute(){
+    function getKTPDataAttribute()
+    {
+//        $ktp = KTPIdentification::where("user_id", '=', $this->id)->first();
+//        if ($ktp != null) {
+//            return $ktp;
+//        } else {
+//            null;
+//        }
+//
+        return "";
+    }
+
+    function getRoleDescAttribute()
+    {
         $retVal = "";
-        switch ($this->role){
+        switch ($this->role) {
             case 3:
                 return "User";
                 break;
@@ -64,12 +78,13 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-        /**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
      */
-    public function getJWTIdentifier() {
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
@@ -78,7 +93,8 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return array
      */
-    public function getJWTCustomClaims() {
+    public function getJWTCustomClaims()
+    {
         return [];
     }
 }

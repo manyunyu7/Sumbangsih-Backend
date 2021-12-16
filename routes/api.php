@@ -31,6 +31,10 @@ Route::group([
 Route::post('auth/register', 'CustomAuthController@register');
 Route::get('auth/check-number', 'StaffController@checkIfNumberRegistered');
 
+Route::prefix("user")->group(function(){
+    Route::get('{id}', 'StaffController@profile');
+});
+
 Route::prefix('news')->group(function () {
     Route::get('/get', 'NewsController@get');
 });
