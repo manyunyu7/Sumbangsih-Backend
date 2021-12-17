@@ -17,6 +17,7 @@ class CreateBansosEventsTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('status')->nullable();
+            $table->string('kuotas')->nullable();
             $table->string('time_start')->nullable();
             $table->string('time_end')->nullable();
             $table->timestamps();

@@ -21,6 +21,40 @@ class KTPController extends Controller
         return view('ktp.create');
     }
 
+    public function viewVerifikasi()
+    {
+        $datas = KTPIdentification::where('user_id','<>',null)->get();
+        return view('ktp.verifikasi')->with(compact('datas'));
+    }
+
+    // this function used by admin to verif an KTP
+    public function verif(Request $request,$id){
+        $ktp = KTPIdentification::findOrFail($id);
+        $ktp->verification_notes = $request->verif_notes;
+        $ktp->verification_status = $request->verification_status;
+
+        if ($ktp->save()) {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseSuccessWithData(
+                    200, 1, 200,
+                    "Berhasil Mengupdate Data",
+                    "Success",
+                    Auth::user(),
+                );
+            return back()->with(["success" => "Berhasil Mengupdate Data"]);
+        } else {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseErrorWithData(
+                    400, 3, 400,
+                    "Berhasil Mengupdate Data",
+                    "Success",
+                    ""
+                );
+            return back()->with(["errors" => "Gagal Mengupdate Data"]);
+        }
+    }
+
+
     public function getAllKTP()
     {
         return KTPIdentification::all();
@@ -90,6 +124,9 @@ class KTPController extends Controller
             $photoPath = $savePathDB;
             $ktp->photo_face = $photoPath;
         }
+
+        $ktp->verification_status=null;
+        $ktp->verification_notes=null;
 
         if ($ktp->save()) {
             return RazkyFeb::responseSuccessWithData(200, 1, 1, "Verifikasi Berhasil Dikirim", "KTP found", $ktp);

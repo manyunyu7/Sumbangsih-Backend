@@ -30,25 +30,16 @@
                         </a>
                     </li>
 
-
                     <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">Konten</span></li>
+                    <li class="nav-small-cap"><span class="hide-menu">Verifikasi NIK</span></li>
 
                     <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('news/create') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ URL('nik/verification') }}" aria-expanded="false">
                             <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Tambah Konten
+                            <span class="hide-menu">Lihat Verifikasi
                         </span>
                         </a>
                     </li>
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('news/manage') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Manage Konten
-                        </span>
-                        </a>
-                    </li>
-
 
                     <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">DATA KTP</span></li>
@@ -64,6 +55,24 @@
                         <a class="sidebar-link" href="{{ URL('ktp/manage') }}" aria-expanded="false">
                             <i data-feather="tag" class="feather-icon"></i>
                             <span class="hide-menu">Manage KTP
+                        </span>
+                        </a>
+                    </li>
+
+                    <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">Konten</span></li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('news/create') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Tambah Konten
+                        </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('news/manage') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Manage Konten
                         </span>
                         </a>
                     </li>

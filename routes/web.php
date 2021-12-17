@@ -63,12 +63,19 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('manage', "$cr@viewManage");
     });
 
+    Route::prefix("nik")->group(function () {
+        $cr = "KTPController";
+        Route::get('verification', "$cr@viewVerifikasi");
+    });
+
+
     Route::prefix("ktp")->group(function () {
         $cr = "KTPController";
         Route::get('create', "$cr@viewCreate");
         Route::post('store', "$cr@store");
         Route::get('{id}/edit', "$cr@viewUpdate");
         Route::post('{id}/update', "$cr@update");
+        Route::post('{id}/verif', "$cr@verif");
         Route::get('{id}/delete', "$cr@delete");
         Route::get('manage', "$cr@viewManage");
     });

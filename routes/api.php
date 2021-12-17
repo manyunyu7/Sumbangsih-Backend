@@ -49,6 +49,12 @@ Route::prefix("ktp")->group(function () {
     Route::post('{nik}/uploadVerification', "$cr@uploadVerification");
 });
 
+Route::prefix("pengajuan")->group(function (){
+    $cr = "PengajuanSKUController";
+    Route::get('upload', "$cr@getActiveEvent");
+    Route::post('upload', "$cr@upload");
+});
+
 Route::group(['middleware' => ['auth:api']], function () {
     Route::prefix('user')->group(function () {
         Route::post('/update-photo', 'StaffController@updateProfilePhoto');
