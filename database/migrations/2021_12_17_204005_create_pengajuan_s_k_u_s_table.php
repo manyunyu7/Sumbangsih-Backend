@@ -17,6 +17,7 @@ class CreatePengajuanSKUSTable extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id")->nullable();
             $table->unsignedBigInteger("event_id")->nullable();
+            $table->unique(['user_id', 'event_id']);
             $table->string("lat_selfie")->nullable();
             $table->string("long_selfie")->nullable();
             $table->string("lat_usaha")->nullable();
@@ -25,6 +26,9 @@ class CreatePengajuanSKUSTable extends Migration
             $table->string("photo_ktp")->nullable();
             $table->string("photo_usaha")->nullable();
             $table->string("photo_selfie")->nullable();
+            $table->string("type")->nullable();
+            $table->string("nib")->nullable();
+            $table->unique(['user_id', 'event_id']);
             $table->foreign("event_id")->references("id")->on("bansos_events")->onDelete("cascade");
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();

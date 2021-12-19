@@ -13,10 +13,10 @@ class PengajuanSKUController extends Controller
 {
     public function getActiveEvent()
     {
-        $obj = BansosEvent::where("status", '=', 'active')->first();
+        $obj = BansosEvent::where("status", '=', '1')->first();
         if ($obj == null) {
             return RazkyFeb::responseErrorWithData(
-                400, 1, 1, "Kegiatan BLT Tidak Ditemukan",
+                400, 0, 0, "Kegiatan BLT Tidak Ditemukan",
                 "Failed", $obj
             );
         } else {
@@ -29,6 +29,16 @@ class PengajuanSKUController extends Controller
 
     public function upload(Request $request)
     {
+        $rules = [
+            "user_id" => "required",
+            "event_id" => "required",
+            "nama_usaha" => "required",
+        ];
+        $customMessages = [
+            'required' => 'Mohon Isi Kolom :attribute terlebih dahulu'
+        ];
+        $this->validate($request, $rules, $customMessages);
+
         $object = new PengajuanSKU();
         $object->user_id = $request->user_id;
         $object->event_id = $request->event_id;
@@ -37,6 +47,8 @@ class PengajuanSKUController extends Controller
         $object->lat_usaha = $request->lat_usaha;
         $object->long_usaha = $request->long_usaha;
         $object->nama_usaha = $request->nama_usaha;
+        $object->type = $request->type;
+        $object->nib = $request->nib;
 
         if ($request->photo_ktp != null) {
 
@@ -52,8 +64,8 @@ class PengajuanSKUController extends Controller
             $object->photo_ktp = $photoPath;
         }
 
-        if ($request->photo_face != null) {
-            $image = $request->photo_face;  // your base64 encoded
+        if ($request->photo_selfie != null) {
+            $image = $request->photo_selfie;  // your base64 encoded
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
             $imageName = "face_" . time() . $object->user_id . '_' . $object->event_id . '.' . 'png';
@@ -62,7 +74,7 @@ class PengajuanSKUController extends Controller
             $path = public_path() . "$savePathDB";
             \File::put($path, base64_decode($image));
             $photoPath = $savePathDB;
-            $object->photo_face = $photoPath;
+            $object->photo_selfie = $photoPath;
         }
 
         if ($request->photo_usaha != null) {
@@ -79,9 +91,9 @@ class PengajuanSKUController extends Controller
         }
 
         if ($object->save()) {
-            return RazkyFeb::responseSuccessWithData(200, 1, 1, "Verifikasi Berhasil Dikirim", "KTP found", $ktp);
+            return RazkyFeb::responseSuccessWithData(200, 1, 1, "Pengajuan Berhasil Dikirim", "KTP found", $object);
         } else {
-            return RazkyFeb::responseErrorWithData(200, 0, 0, "Verifikasi Gagal Dilakukan", "KTP found", $ktp);
+            return RazkyFeb::responseErrorWithData(200, 0, 0, "Pengajuan Gagal Dilakukan", "KTP found", $object);
         }
     }
 
