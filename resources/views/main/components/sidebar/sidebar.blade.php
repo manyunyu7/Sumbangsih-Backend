@@ -31,6 +31,51 @@
                     </li>
 
                     <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">Pengajuan BLT</span></li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/all') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Semua Pengajuan
+                        </span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/kelurahan') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Approval Kelurahan
+                        </span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/kecamatan') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Approval Kecamatan
+                        </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/panitia') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Approval Panitia
+                        </span>
+                        </a>
+                    </li>
+
+                    <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">DATA KTP</span></li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/create') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Tambah KTP
+                        </span>
+                        </a>
+                    </li>
+
+                    <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">Verifikasi NIK</span></li>
 
                     <li class="sidebar-item active">

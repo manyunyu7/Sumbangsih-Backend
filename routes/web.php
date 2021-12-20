@@ -63,6 +63,20 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('manage', "$cr@viewManage");
     });
 
+    Route::prefix('pengajuan-warga')->group(function () {
+        $cr = "PengajuanTrackingController";
+        Route::get('create', "$cr@viewCreate");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/proceed', "$cr@viewUpdate");
+        Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('all', "$cr@viewAll");
+        Route::get('kelurahan', "$cr@viewKelurahan");
+        Route::get('kecamatan', "$cr@viewKecamatan");
+        Route::get('panitia', "$cr@viewPanitia");
+        Route::get('filter-kecamatan', "$cr@tesfilter");
+    });
+
     Route::prefix("nik")->group(function () {
         $cr = "KTPController";
         Route::get('verification', "$cr@viewVerifikasi");

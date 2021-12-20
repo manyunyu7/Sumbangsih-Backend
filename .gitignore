@@ -10,6 +10,7 @@
 /public/web_files/user_profile/*
 /public/web_files/doc/*
 /public/web_files/ktp/*
+/public/web_files/pengajuan/*
 /storage/*.key
 /vendor
 .env

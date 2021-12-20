@@ -51,6 +51,7 @@ Route::prefix("ktp")->group(function () {
 
 Route::prefix("pengajuan")->group(function (){
     $cr = "PengajuanSKUController";
+    Route::any('self-check', "$cr@selfCheck");
     Route::any('activeEvent', "$cr@getActiveEvent");
     Route::post('upload', "$cr@upload");
 });

@@ -6,11 +6,46 @@ use App\Helper\RazkyFeb;
 use App\Models\BansosEvent;
 use App\Models\KTPIdentification;
 use App\Models\PengajuanSKU;
+use App\Models\Tracking;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PengajuanSKUController extends Controller
 {
+
+    public function selfCheck(Request $request)
+    {
+        $pengajuan = PengajuanSKU::where("user_id", '=', $request->id)->first();
+        if ($pengajuan != null) {
+            if ($pengajuan->isFinish) {
+                $status = Tracking::where('status', '=', 0)->get()->count();
+                if ($status == 0) {
+                    // if finish and not ditolak
+                    return RazkyFeb::responseSuccessWithData(
+                        200, 1, 1, "", "", $pengajuan
+                    );
+                } else {
+                    // if ada yang ditolak
+                    return RazkyFeb::responseSuccessWithData(
+                        200, 1, 4, "", "", $pengajuan
+                    );
+                }
+
+            } else {
+                // if not finish / on progress
+                return RazkyFeb::responseSuccessWithData(
+                    200, 1, 3, "", "", $pengajuan
+                );
+            }
+        } else {
+            return RazkyFeb::responseSuccessWithData(
+                200, 0, 0, "Tidak Ada Pengajuan", "No Data", $pengajuan
+            );
+        }
+    }
+
+
     public function getActiveEvent()
     {
         $obj = BansosEvent::where("status", '=', '1')->first();
@@ -91,6 +126,18 @@ class PengajuanSKUController extends Controller
         }
 
         if ($object->save()) {
+            $date = Carbon::now()->format('Y-m-d');
+            $objTracking = new Tracking();
+            $objTracking->user_id = $object->user_id;
+            $objTracking->pengajuan_id = $object->id;
+            $objTracking->date = $date;
+            $objTracking->updated_by = $object->user_id;
+            $objTracking->status = 1;
+            $objTracking->role = "User";
+            $objTracking->title = "User - $date ";
+            $objTracking->message = "User Telah Mengajukan Permohonan BLT, Permohonan akan diteruskan ke kelurahan";
+            $objTracking->save();
+
             return RazkyFeb::responseSuccessWithData(200, 1, 1, "Pengajuan Berhasil Dikirim", "KTP found", $object);
         } else {
             return RazkyFeb::responseErrorWithData(200, 0, 0, "Pengajuan Gagal Dilakukan", "KTP found", $object);

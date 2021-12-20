@@ -56,6 +56,12 @@ class User extends Authenticatable implements JWTSubject
     {
         $retVal = "";
         switch ($this->role) {
+            case 5:
+                return "Kecamatan";
+                break;
+            case 4:
+                return "Kelurahan";
+                break;
             case 3:
                 return "User";
                 break;

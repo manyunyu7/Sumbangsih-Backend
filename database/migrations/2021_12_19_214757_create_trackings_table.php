@@ -15,12 +15,13 @@ class CreateTrackingsTable extends Migration
     {
         Schema::create('trackings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("updated_by");
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("pengajuan_id");
             $table->string("date");
-            $table->string("status");
-            $table->foreign("updated_by")->references("id")->on("users")->onDelete("cascade");
+            $table->string("title")->nullable();
+            $table->string("status")->nullable();
+            $table->string("role")->nullable();
+            $table->string("message")->nullable();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->foreign("pengajuan_id")->references("id")->on("pengajuan_s_k_u_s")->onDelete("cascade");
             $table->timestamps();

@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage Event Bansos</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage Pengajuan</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Manage Event Bansos</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Manage</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Pengajuan BLT</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Pengajuan Warga</li>
                     </ol>
                 </nav>
             </div>
@@ -29,7 +29,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h4 class="mb-0 ">Manage</h4>
+            <h4 class="mb-0 ">Manage Pengajuan Warga <br>{{$message}}</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -37,12 +37,12 @@
                     <thead class="">
                     <tr>
                         <th data-sortable="">No</th>
-                        <th data-sortable="">Nama</th>
-                        <th data-sortable="">Tanggal Mulai</th>
-                        <th data-sortable="">Tanggal Selesai</th>
-                        <th data-sortable="">Diinput Pada</th>
-                        <th data-sortable="">Edit</th>
-                        <th data-sortable="">Hapus</th>
+                        <th data-sortable="">Nama Warga</th>
+                        <th data-sortable="">Kegiatan BLT</th>
+                        <th data-sortable="">Jenis Pengajuan</th>
+                        <th data-sortable="">Status</th>
+                        <th data-sortable="">Tanggal</th>
+                        <th data-sortable="">Proses</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,20 +50,22 @@
                     @forelse ($datas as $data)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $data->name }}</td>
-                            <td>{{ $data->time_start}}</td>
-                            <td>{{ $data->time_end }}</td>
-                            <td>{{ $data->created_at }}</td>
-
+                            <td>{{ $data->ktp_data->name }}</td>
+                            <td>{{ $data->event_data->name}}</td>
                             <td>
-                                <a href="{{url('/bansos-event'.'/'.$data->id.'/edit')}}">
+                                @if($data->type=="nosku")
+                                    Tanpa SKU
+                                @endif
+                                @if($data->type=="sku")
+                                    Dengan SKU
+                                @endif
+                            </td>
+                            <td>{{ $data->status_desc}}</td>
+                            <td>{{ $data->created_at }}</td>
+                            <td>
+                                <a href="{{url('/pengajuan-warga'.'/'.$data->id.'/proceed')}}">
                                     <button type="button" class="btn btn-primary">Edit</button>
                                 </a>
-                            </td>
-                            <td>
-                                <button id="{{ $data->id }}" type="button"
-                                        class="btn btn-danger btn-delete mr-2">Hapus Konten
-                                </button>
                             </td>
                         </tr>
                     @empty
