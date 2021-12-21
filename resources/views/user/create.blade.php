@@ -88,6 +88,8 @@
                                 <option value="1">Admin</option>
                                 <option value="2">Volunteer</option>
                                 <option value="3">User</option>
+                                <option value="4">Kelurahan</option>
+                                <option value="5">Kecamatan</option>
                             </select>
                         </div>
 

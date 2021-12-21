@@ -31,12 +31,27 @@ class HomeController extends Controller
         if (Auth::user()->role == 3) {
             return redirect('/user');
         }
+        if (Auth::user()->role == 4) {
+            return redirect('/kelurahan');
+        }
+        if (Auth::user()->role == 5) {
+            return redirect('/kecamatan');
+        }
         return redirect('/admin');
     }
 
     public function admin()
     {
         return view('home.admin');
+    }
+
+    public function kelurahan()
+    {
+        return view('home.admin');
+    }
+
+    public function kecamatan(){
+
     }
 
     public function user()

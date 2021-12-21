@@ -66,6 +66,8 @@
                                 <option {{($data->role==1) ? 'selected' : ''}}  value="1">Admin</option>
                                 <option {{($data->role==2) ? 'selected' : ''}} value="2">Volunteer</option>
                                 <option {{($data->role==3) ? 'selected' : ''}} value="3">User</option>
+                                <option {{($data->role==4) ? 'selected' : ''}} value="4">Kelurahan</option>
+                                <option {{($data->role==5) ? 'selected' : ''}} value="5">Kecamatan</option>
                             </select>
                         </div>
 

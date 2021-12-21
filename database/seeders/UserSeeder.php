@@ -27,6 +27,24 @@ class UserSeeder extends Seeder
         );
 
         $this->insertUser(
+            'Akun Kelurahan',
+            '4',
+            '081234567890',
+            'kelurahan@gmail.com',
+            '/razky_samples/firriezky.jpg',
+            bcrypt('998877')
+        );
+
+        $this->insertUser(
+            'Akun Kelurahan',
+            '5',
+            '081234567891',
+            'kecamatan@gmail.com',
+            '/razky_samples/firriezky.jpg',
+            bcrypt('998877')
+        );
+
+        $this->insertUser(
             'Raffey Cassidy',
             '3',
             '082113530900',

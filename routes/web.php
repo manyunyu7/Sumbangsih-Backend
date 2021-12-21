@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/admin', [App\Http\Controllers\HomeController::class, 'admin']);
+    Route::get('/kelurahan', [App\Http\Controllers\HomeController::class, 'kelurahan']);
+    Route::get('/kecamatan', [App\Http\Controllers\HomeController::class, 'kecamatan']);
     Route::get('/user', [App\Http\Controllers\HomeController::class, 'user']);
     Route::get('/staff', [App\Http\Controllers\HomeController::class, 'index']);
 

@@ -93,9 +93,12 @@ class StaffController extends Controller
 
         $role = "";
 
-        if ($request->role == "" || $request->role == null) {
+        if ($request->user_role == "" || $request->user_role == null) {
             $role = 3;
+        }else{
+            $role = $request->user_role;
         }
+
 
         $user = new User();
         $user->name = $request->user_name;

@@ -10,7 +10,53 @@
                                             aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                             class="hide-menu">Dashboard</span></a></li>
 
-                @if (Auth::user()->role != 3)
+
+                <li class="nav-small-cap"><span class="hide-menu">Pengajuan BLT</span></li>
+
+                <li class="list-divider"></li>
+
+                @if(Auth::user()->role==1)
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/all') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Semua Pengajuan
+                        </span>
+                        </a>
+                    </li>
+                @endif
+
+                @if(Auth::user()->role==1 || Auth::user()->role==4)
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/kelurahan') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Approval Kelurahan
+                        </span>
+                        </a>
+                    </li>
+                @endif
+
+                @if(Auth::user()->role==1 || Auth::user()->role==5)
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/kecamatan') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Approval Kecamatan
+                        </span>
+                        </a>
+                    </li>
+                @endif
+
+                @if(Auth::user()->role==1)
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/panitia') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Approval Panitia
+                        </span>
+                        </a>
+                    </li>
+                @endif
+
+                @if (Auth::user()->role == 1)
                     <li class="list-divider"></li>
 
                     <li class="nav-small-cap"><span class="hide-menu">Data Pengguna</span></li>
@@ -27,40 +73,6 @@
                             <i data-feather="tag" class="feather-icon"></i>
                             <span class="hide-menu">Manage
                             </span>
-                        </a>
-                    </li>
-
-                    <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">Pengajuan BLT</span></li>
-
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/all') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Semua Pengajuan
-                        </span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/kelurahan') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Approval Kelurahan
-                        </span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/kecamatan') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Approval Kecamatan
-                        </span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/panitia') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Approval Panitia
-                        </span>
                         </a>
                     </li>
 
