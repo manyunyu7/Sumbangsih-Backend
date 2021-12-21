@@ -167,8 +167,9 @@ class PengajuanTrackingController extends Controller
                     $message = "Dokumen Permohonan BLT anda sedang dalam proses seleksi";
                 }
 
+                $stat = $data->status;
                 if ($data->status == 0) {
-                    $data->status == 199;
+                    $data->status = 199;
                     $objPengajuan->isDisbursed = 0;
                     $objPengajuan->isFinish = 3;
                     $title = "Panitia Penyeleksi - $date";
