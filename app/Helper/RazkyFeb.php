@@ -4,12 +4,22 @@ namespace App\Helper;
 
 
 use App\Models\UserMNotification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class RazkyFeb
 {
+
+    public static function IndonesianDateTimeline()
+    {
+        $date = Carbon::now()->locale('id');
+
+        $date->settings(['formatFunction' => 'translatedFormat']);
+
+        return $date->format('l, j F Y');
+    }
 
     public static function hello()
     {

@@ -29,37 +29,51 @@
             <h3 class="card-title">Proses Pengajuan</h3>
             <div class="row">
                 <div class="col-12">
-                    <form action='{{ url("pengajuan-warga/$data->id/update") }}' enctype="multipart/form-data" method="post">
+                    <form action='{{ url("pengajuan-warga/$data->id/update") }}' enctype="multipart/form-data"
+                          method="post">
                         @csrf
 
                         <div class="form-group">
                             <label for="">Status</label>
                             <select class="form-control" name="status" id="">
-                                <option value="1">Diterima</option>
+                                @if(Auth::user()->role!=1)
+                                    <option value="1">Diterima</option>
+                                @endif
                                 <option value="0">Ditolak</option>
+                                @if(Auth::user()->role==1)
+                                    <option value="2">Admin - Proses Seleksi / Pending</option>
+                                    <option value="3">Admin - Selesai Diseleksi</option>
+                                    <option value="10">Admin - Dicairkan (Masuk Rekening)</option>
+                                @endif
                             </select>
                         </div>
 
-                        @if(Auth::user()->role==1)
+
+                        @if(Auth::user()->role==99)
                             <div class="form-group">
                                 <label for="basicInput">Judul</label>
-                                <input type="text" name="title" required class="form-control" placeholder="Judul">
+                                <input type="text" name="title" required class="form-control" placeholder="Judul"
+                                       @if(Auth::user()->role=="1")
+                                       value="Panitia Penyeleksi"
+                                    @endif
+                                >
                             </div>
                         @endif
 
-                        <div class="form-group">
-                            <label for="basicInput">Pesan</label>
-                            <input type="text" name="message" required class="form-control"
-                                   placeholder="Pesan"
-                                   @if(Auth::user()->role=="4")
-                                   value="Dokumen Permohonan SKU sudah divalidasi, Dokumen akan diteruskan ke kecamatan"
-                                   @endif
-                                   @if(Auth::user()->role=="5")
-                                   value="Dokumen Permohonan SKU sudah divalidasi, Permohonan blt akan dikirim ke panitia penyeleksian"
-                                @endif
-                            >
-                        </div>
-
+                        @if(Auth::user()->role!=1)
+                            <div class="form-group">
+                                <label for="basicInput">Pesan</label>
+                                <input type="text" name="message" required class="form-control"
+                                       placeholder="Pesan"
+                                       @if(Auth::user()->role=="4")
+                                       value="Dokumen Permohonan SKU sudah divalidasi, Dokumen akan diteruskan ke kecamatan"
+                                       @endif
+                                       @if(Auth::user()->role=="5")
+                                       value="Dokumen Permohonan SKU sudah divalidasi, Permohonan BLT akan dikirim ke panitia penyeleksian"
+                                    @endif>
+                            </div>
+                        @endif
+                        {{--                        @endif--}}
                         <button type="submit" class="btn btn-outline-primary">SIMPAN</button>
                     </form>
                 </div>
@@ -235,11 +249,6 @@
                     </div>
 
                 </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-danger">SIMPAN DATA</button>
-                </div>
-
-
             </div>
         </div>
     </div>

@@ -77,6 +77,27 @@ class PengajuanTrackingController extends Controller
     }
 
     /**
+     * Show the edit form for editing armada
+     *
+     */
+    public function getHistory(Request $request)
+    {
+        $userId = $request->user_id;
+
+        $findPengajuan = PengajuanSKU::where("user_id", '=', $userId)->first();
+        if ($findPengajuan == null) {
+            return RazkyFeb::responseSuccessWithData(200, 1, 3, "Success", "Success", null);
+        } else {
+
+            $id = $findPengajuan->id;
+
+            $data = Tracking::where("pengajuan_id", '=', $id)->orderBy('id', 'DESC')->get();
+            return RazkyFeb::responseSuccessWithData(200, 1, 1, "Success", "Success", $data);
+        }
+        return RazkyFeb::error3(0, 0);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -104,11 +125,14 @@ class PengajuanTrackingController extends Controller
         $data->date = Carbon::now()->format('d F Y');
         $data->user_id = $userId;
         $data->pengajuan_id = $id;
-        $data->status = $request->status;
+
+        $savedStatus = $request->status;
+
+        $data->status = $savedStatus;
         $data->message = $request->message;
         $data->updated_by = Auth::id();
 
-        $date = Carbon::now()->format('Y-m-d');
+        $date = RazkyFeb::IndonesianDateTimeline();
 
         switch (Auth::user()->role) {
             case 4 : // Kelurahan
@@ -128,7 +152,21 @@ class PengajuanTrackingController extends Controller
                 }
                 break;
             case 1 :
-                $data->title = $request->title;
+                $title = "Panitia Penyeleksi - $date ";
+                $message = "";
+                if ($data->status == 10) {
+                    $title = "Dana sudah masuk ke rekening";
+                    $message = "Permohonan selesai,\nPeriksa halaman pengajuan";
+                }
+                if ($data->status == 3) {
+                    $message = "Dokumen Permohonan BLT anda telah di seleksi. Periksa halaman pengajuan";
+                }
+                if ($data->status == 2) {
+                    $message = "Dokumen Permohonan BLT anda sedang dalam proses seleksi";
+                }
+
+                $data->title = $title;
+                $data->message = $message;
                 break;
         }
 

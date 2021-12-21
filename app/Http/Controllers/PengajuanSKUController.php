@@ -133,8 +133,8 @@ class PengajuanSKUController extends Controller
             $objTracking->date = $date;
             $objTracking->updated_by = $object->user_id;
             $objTracking->status = 1;
-            $objTracking->role = "User";
-            $objTracking->title = "User - $date ";
+            $objTracking->role = "100";
+            $objTracking->title = "User - " . RazkyFeb::IndonesianDateTimeline();
             $objTracking->message = "User Telah Mengajukan Permohonan BLT, Permohonan akan diteruskan ke kelurahan";
             $objTracking->save();
 
