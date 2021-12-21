@@ -152,14 +152,27 @@ class PengajuanTrackingController extends Controller
                 $title = "Panitia Penyeleksi - $date ";
                 $message = "";
                 if ($data->status == 10) {
+                    $objPengajuan->isDisbursed = 1;
+                    $objPengajuan->isFinish = 1;
                     $title = "Dana sudah masuk ke rekening";
                     $message = "Permohonan selesai,\nPeriksa halaman pengajuan";
                 }
+
                 if ($data->status == 3) {
+                    $objPengajuan->isFinish = 2;
                     $message = "Dokumen Permohonan BLT anda telah di seleksi. Periksa halaman pengajuan";
                 }
+
                 if ($data->status == 2) {
                     $message = "Dokumen Permohonan BLT anda sedang dalam proses seleksi";
+                }
+
+                if ($data->status == 0) {
+                    $data->status == 199;
+                    $objPengajuan->isDisbursed = 0;
+                    $objPengajuan->isFinish = 3;
+                    $title = "Panitia Penyeleksi - $date";
+                    $message = "Pengajuan BLT Anda Tidak Disetujui";
                 }
 
                 $data->title = $title;

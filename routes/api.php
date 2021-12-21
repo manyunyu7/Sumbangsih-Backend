@@ -55,6 +55,7 @@ Route::prefix("pengajuan")->group(function (){
     Route::any('self-check', "$cr@selfCheck");
     Route::any('history', "$cr2@getHistory");
     Route::any('activeEvent', "$cr@getActiveEvent");
+    Route::any('currentUser', "$cr@getCurrentUser");
     Route::post('upload', "$cr@upload");
 });
 

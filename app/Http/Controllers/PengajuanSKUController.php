@@ -62,6 +62,23 @@ class PengajuanSKUController extends Controller
         }
     }
 
+    public function getCurrentUser(Request $request)
+    {
+        $id = $request->user_id;
+        $obj = PengajuanSKU::where("user_id",'=',$id)->first();
+        if ($obj == null) {
+            return RazkyFeb::responseErrorWithData(
+                400, 0, 0, "Kegiatan BLT Tidak Ditemukan",
+                "Failed", $obj
+            );
+        } else {
+            return RazkyFeb::responseSuccessWithData(
+                200, 1, 1, "Kegiatan BLT Ditemukan",
+                "Success", $obj
+            );
+        }
+    }
+
     public function upload(Request $request)
     {
         $rules = [
