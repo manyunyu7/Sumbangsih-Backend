@@ -44,14 +44,15 @@ class PengajuanTrackingController extends Controller
 
     public function viewKelurahan()
     {
-        $datas = PengajuanSKU::all();
+        $datas = PengajuanSKU::whereNull("approved_kelurahan")->get();
         $message = "Tingkat Kelurahan";
         return view('pengajuan.manage_new')->with(compact('datas', 'message'));
     }
 
     public function viewKecamatan()
     {
-        $datas = PengajuanSKU::where('approved_kelurahan', '=', '1')->get();
+        $matchThese = ['approved_kecamatan' => null, 'approved_kelurahan' => '1'];
+        $datas = PengajuanSKU::where($matchThese)->get();
         $message = "Tingkat Kecamatan";
         return view('pengajuan.manage_new')->with(compact('datas', 'message'));
     }
@@ -88,9 +89,7 @@ class PengajuanTrackingController extends Controller
         if ($findPengajuan == null) {
             return RazkyFeb::responseSuccessWithData(200, 1, 3, "Success", "Success", null);
         } else {
-
             $id = $findPengajuan->id;
-
             $data = Tracking::where("pengajuan_id", '=', $id)->orderBy('id', 'DESC')->get();
             return RazkyFeb::responseSuccessWithData(200, 1, 1, "Success", "Success", $data);
         }
@@ -98,8 +97,6 @@ class PengajuanTrackingController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param \Illuminate\Http\Request $request
      */
     public function store(Request $request)

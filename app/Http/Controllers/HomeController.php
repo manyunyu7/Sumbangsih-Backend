@@ -51,7 +51,7 @@ class HomeController extends Controller
     }
 
     public function kecamatan(){
-
+        return view('home.admin');
     }
 
     public function user()
