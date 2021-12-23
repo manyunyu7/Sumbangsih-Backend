@@ -56,6 +56,18 @@
                     </li>
                 @endif
 
+                <li class="list-divider"></li>
+
+                <li class="nav-small-cap"><span class="hide-menu">Customer Service</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('/cs-chat/manage') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Pesan Masuk
+                            </span>
+                    </a>
+                </li>
+
                 @if (Auth::user()->role == 1)
                     <li class="list-divider"></li>
 

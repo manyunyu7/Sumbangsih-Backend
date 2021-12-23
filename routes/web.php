@@ -55,6 +55,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('manage', "$cr@viewManage");
     });
 
+    Route::prefix('cs-chat')->group(function () {
+        $cr = "ChatController";
+        Route::get('create', "$cr@viewCreate");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/edit', "$cr@viewUpdate");
+        Route::post('{id}/update', "$cr@update");
+        Route::post('{id}/store-admin', "$cr@storeAdmin");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('manage', "$cr@viewManage");
+    });
+
     Route::prefix('bansos-event')->group(function () {
         $cr = "BansosEventController";
         Route::get('create', "$cr@viewCreate");

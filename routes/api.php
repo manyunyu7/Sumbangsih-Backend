@@ -59,6 +59,15 @@ Route::prefix("pengajuan")->group(function (){
     Route::post('upload', "$cr@upload");
 });
 
+Route::prefix('chat')->group(function () {
+    Route::post('/store', 'ChatController@store');
+    Route::delete('/{id}/delete', 'RSChatController@delete');
+    Route::get('/get', 'RSChatController@getAll');
+    Route::get('topic/{id}/get', 'ChatController@getByTopic');
+    Route::get('user/{id}/get', 'ChatController@getByUser');
+});
+
+
 Route::group(['middleware' => ['auth:api']], function () {
     Route::prefix('user')->group(function () {
         Route::post('/update-photo', 'StaffController@updateProfilePhoto');
@@ -73,13 +82,6 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::prefix('price')->group(function () {
         Route::get('/', 'PriceController@getAll');
-    });
-
-    Route::prefix('rs-chat')->group(function () {
-        Route::post('/store', 'RSChatController@store');
-        Route::delete('/{id}/delete', 'RSChatController@delete');
-        Route::get('/get', 'RSChatController@getAll');
-        Route::get('topic/{id}/get', 'RSChatController@getByTopic');
     });
 
     Route::post('save-user', 'UserController@saveUser');
