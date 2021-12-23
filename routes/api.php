@@ -35,6 +35,8 @@ Route::prefix("user")->group(function(){
     Route::get('{id}', 'StaffController@profile');
 });
 
+Route::get('/stats', 'AndroidHomeController@stats');
+
 Route::prefix('news')->group(function () {
     Route::get('/get', 'NewsController@get');
 });

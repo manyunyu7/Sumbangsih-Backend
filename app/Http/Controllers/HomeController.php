@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BansosEvent;
+use App\Models\PengajuanSKU;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,7 +52,8 @@ class HomeController extends Controller
         return view('home.admin');
     }
 
-    public function kecamatan(){
+    public function kecamatan()
+    {
         return view('home.admin');
     }
 
@@ -58,4 +61,5 @@ class HomeController extends Controller
     {
         return view('home.user');
     }
+
 }
