@@ -49,6 +49,21 @@ class StaffController extends Controller
         return view('user.create');
     }
 
+    public function checkPassword($id, Request $request)
+    {
+        $user = User::findOrFail($id);
+        $hasher = app('hash');
+        //If Password Sesuai
+        if (!$hasher->check($request->password, $user->password)) {
+            if ($request->is('api/*'))
+                return RazkyFeb::error(400, "Password Lama Tidak Sesuai");
+
+            return back()->with(["errors" => "Password Lama Tidak Sesuai"]);
+        } else {
+            return RazkyFeb::success(200, "Password Sesuai");
+        }
+    }
+
 
     function destroy($id)
     {
@@ -95,7 +110,7 @@ class StaffController extends Controller
 
         if ($request->user_role == "" || $request->user_role == null) {
             $role = 3;
-        }else{
+        } else {
             $role = $request->user_role;
         }
 
@@ -333,6 +348,42 @@ class StaffController extends Controller
             }
         }
     }
+
+    function updatePasswordCompact(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($request->id == null) {
+            $user = Auth::user(); // IF FROM API -> WITH TOKEN
+        }
+
+        $user->password = Hash::make($request->password);
+
+        if ($user->save()) {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseSuccessWithData(
+                    200,
+                    1,
+                    1,
+                    "Berhasil Mengupdate Password",
+                    "Success",
+                    Auth::user(),
+                );
+
+            return back()->with(["success" => "Berhasil Mengupdate Password"]);
+        } else {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseErrorWithData(
+                    200,
+                    3,
+                    3,
+                    "Gagal Mengupdate Password",
+                    "Error",
+                    ""
+                );
+            return back()->with(["errors" => "Gagal Mengupdate Password"]);
+        }
+    }
+
 
     function profile(Request $request, $id)
     {

@@ -69,6 +69,10 @@ Route::prefix('chat')->group(function () {
     Route::get('user/{id}/get', 'ChatController@getByUser');
 });
 
+Route::prefix('user')->group(function () {
+    Route::post('{id}/checkPassword', 'StaffController@checkPassword');
+    Route::post('{id}/updatePasswordCompact', 'StaffController@updatePasswordCompact');
+});
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::prefix('user')->group(function () {

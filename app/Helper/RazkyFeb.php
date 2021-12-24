@@ -107,7 +107,8 @@ class RazkyFeb
 
     public static function error($code, $message)
     {
-        return response()->json(['message' => "$message"], $code);
+        return response()->json(["code"=>$code,'message' => "$message"], $code);
+
     }
 
     public static function error3($code, $statusCode, $message)
@@ -115,9 +116,9 @@ class RazkyFeb
         return response()->json(['message' => "$message", "status_code" => $statusCode], $code);
     }
 
-    public static function success($httpCode, $message, $status_code, $api_code)
+    public static function success($code, $message)
     {
-        return response()->json(['message' => "$message", "status_code" => $status_code, $api_code], $httpCode);
+        return response()->json(["code"=>$code,'message' => "$message"], $code);
     }
 
     public static function checkApiKey($key)
