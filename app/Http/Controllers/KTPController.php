@@ -23,17 +23,36 @@ class KTPController extends Controller
 
     public function viewVerifikasi()
     {
-        $datas = KTPIdentification::where('user_id','<>',null)->get();
+        $datas = KTPIdentification::where('user_id', '<>', null)->get();
         return view('ktp.verifikasi')->with(compact('datas'));
     }
 
     // this function used by admin to verif an KTP
-    public function verif(Request $request,$id){
+    public function verif(Request $request, $id)
+    {
         $ktp = KTPIdentification::findOrFail($id);
         $ktp->verification_notes = $request->verif_notes;
         $ktp->verification_status = $request->verification_status;
 
         if ($ktp->save()) {
+
+            if ($ktp->verification_status == 1)
+                RazkyFeb::insertNotification(
+                    $ktp->user_id,
+                    "Verifikasi KTP",
+                    "Data Diterima",
+                    "Pengajuan Verifikasi NIK Telah Diterima, Silakan menunggu notifikasi selanjutnya",
+                    88
+                );
+            else
+                RazkyFeb::insertNotification(
+                    $ktp->user_id,
+                    "Verifikasi KTP",
+                    "Verifikasi Ditolak",
+                    "Pengajuan Verifikasi NIK Anda Ditolak, Silakan Melakukan Pengajuan Ulang",
+                    88
+                );
+
             if ($request->is('api/*'))
                 return RazkyFeb::responseSuccessWithData(
                     200, 1, 200,
@@ -125,10 +144,17 @@ class KTPController extends Controller
             $ktp->photo_face = $photoPath;
         }
 
-        $ktp->verification_status=null;
-        $ktp->verification_notes=null;
+        $ktp->verification_status = null;
+        $ktp->verification_notes = null;
 
         if ($ktp->save()) {
+            RazkyFeb::insertNotification(
+                $user->id,
+                "Verifikasi KTP",
+                "Data Diterima",
+                "Pengajuan Verifikasi NIK Telah Diterima, Silakan menunggu notifikasi selanjutnya",
+                88
+            );
             return RazkyFeb::responseSuccessWithData(200, 1, 1, "Verifikasi Berhasil Dikirim", "KTP found", $ktp);
         } else {
             return RazkyFeb::responseErrorWithData(200, 0, 0, "Verifikasi Gagal Dilakukan", "KTP found", $ktp);

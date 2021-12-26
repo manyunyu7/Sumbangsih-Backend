@@ -41,6 +41,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="basicInput">Kuota Penerima</label>
+                            <input type="number" name="kuota" required class="form-control"
+                                   value="{{ old('kuota') }}"
+                                   placeholder="Misal : 9900">
+                        </div>
+
+                        <div class="form-group">
                             <label for="">Tanggal Mulai</label>
                             <input type="date"
                                    class="form-control" name="time_start" aria-describedby="helpId" placeholder="">

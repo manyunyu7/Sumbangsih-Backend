@@ -185,6 +185,15 @@ class PengajuanTrackingController extends Controller
             $objPengajuan->save();
 
             if ($request->is('api/*'))
+
+                RazkyFeb::insertNotification(
+                    $userId,
+                    "Pengajuan BLT",
+                    "Update Tracking",
+                    "Permintaanmu telah diproses ke tahap ($title), silakan cek di menu riwayat",
+                    76
+                );
+
                 return RazkyFeb::responseSuccessWithData(
                     200, 1, 200,
                     "Berhasil Mengupdate Data",

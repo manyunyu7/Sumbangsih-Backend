@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKTPIdentificationsTable extends Migration
+class CreateReportDataMistakesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateKTPIdentificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ktp', function (Blueprint $table) {
+        Schema::create('report_data_mistakes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id")->nullable();
             $table->string("name")->nullable();
@@ -22,16 +22,11 @@ class CreateKTPIdentificationsTable extends Migration
             $table->string("nik")->nullable();
             $table->string("no_kk")->nullable();
             $table->string("jk")->nullable();
+            $table->string("contact")->nullable();
             $table->string("alamat")->nullable();
-            $table->string("photo_requested")->nullable();
-            $table->string("photo_face")->nullable();
-            $table->string("photo_stored")->nullable();
-            $table->string("lat")->nullable();
-            $table->string("long")->nullable();
-            $table->string("verified_at")->nullable();
-            $table->string("verification_notes")->nullable();
-            $table->string("verification_status")->nullable();
-            $table->foreign("user_id")->references("id")->on("users")->onDelete("set null");
+            $table->string("fixed_at")->nullable();
+            $table->string("fixed_status")->nullable();
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
         });
     }
@@ -43,6 +38,6 @@ class CreateKTPIdentificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ktp');
+        Schema::dropIfExists('report_data_mistakes');
     }
 }

@@ -53,6 +53,7 @@ class BansosEventController extends Controller
         $data = new BansosEvent();
         $data->name = $request->name;
         $data->time_start = $request->time_start;
+        $data->kuotas = $request->kuota;
         $data->time_end = $request->time_end;
         return $this->SaveData($data, $request);
     }
@@ -70,6 +71,7 @@ class BansosEventController extends Controller
         $data->name = $request->name;
         $data->time_start = $request->time_start;
         $data->time_end = $request->time_end;
+        $data->kuotas = $request->kuota;
         $data->status = $request->status;
 
         if ($data->save()) {

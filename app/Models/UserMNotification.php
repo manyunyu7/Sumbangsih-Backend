@@ -13,4 +13,9 @@ class UserMNotification extends Model
         'created_at'  => 'date:Y-m-d h:i:s',
         // 'joined_at' => 'datetime:Y-m-d H:00',
     ];
+
+    /*
+     * 99 : Perbaikan Data Diterima
+     *
+     */
 }

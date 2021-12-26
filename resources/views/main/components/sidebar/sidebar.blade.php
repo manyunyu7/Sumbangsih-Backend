@@ -100,6 +100,28 @@
                     </li>
 
                     <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">Laporan Kesalahan Data</span></li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('data-fix/manage') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Lihat Laporan
+                        </span>
+                        </a>
+                    </li>
+
+                    <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">Komplain</span></li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('komplain/manage') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Lihat Komplain
+                        </span>
+                        </a>
+                    </li>
+
+                    <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">Verifikasi NIK</span></li>
 
                     <li class="sidebar-item active">

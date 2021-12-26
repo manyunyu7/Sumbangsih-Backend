@@ -35,6 +35,22 @@ Route::prefix("user")->group(function(){
     Route::get('{id}', 'StaffController@profile');
 });
 
+Route::prefix('mnotification')->group(function () {
+    Route::get('get', 'MNotificationController@getByUser');
+    Route::get('user/{id}', 'MNotificationController@getByUser');
+    Route::get('setRead/{id}', 'MNotificationController@setRead');
+});
+
+Route::prefix("komplain")->group(function (){
+    $cr = "KomplainsController";
+    Route::post('upload', "$cr@upload");
+});
+
+Route::prefix("fix-data")->group(function (){
+    $cr = "ReportMistakeController";
+    Route::post('upload', "$cr@upload");
+});
+
 Route::get('/stats', 'AndroidHomeController@stats');
 
 Route::prefix('news')->group(function () {
@@ -81,10 +97,7 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/change-password', 'StaffController@updatePassword');
     });
 
-    Route::prefix('mnotification')->group(function () {
-        Route::get('get', 'MNotificationController@getByUser');
-        Route::get('user/{id}', 'MNotificationController@getByUser');
-    });
+
 
     Route::prefix('price')->group(function () {
         Route::get('/', 'PriceController@getAll');

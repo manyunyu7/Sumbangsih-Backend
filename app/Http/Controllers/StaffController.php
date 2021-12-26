@@ -423,6 +423,16 @@ class StaffController extends Controller
                 "number" => $user->contact
             );
             if (RazkyFeb::isAPI()) {
+
+                RazkyFeb::insertNotification(
+                    $user->id,
+                    "Selamat Datang",
+                    "Hallo",
+                    "Selamat Menggunakan Aplikasi Sumbangsih !",
+                    1
+                );
+
+
                 return RazkyFeb::responseSuccessWithData(200, 1, 1, "Success", "Success", $data);
             } else {
                 return back()->with(["success" => "Berhasil Mendaftar, Silakan Login Menggunakan Akun Anda  <a href='$url'> Disini</a > "]);

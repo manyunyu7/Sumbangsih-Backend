@@ -22,6 +22,7 @@ class CreateKomplainsTable extends Migration
             $table->string("rejected_at")->nullable();
             $table->string("feedback")->nullable();
             $table->string("photo")->nullable();
+            $table->string("notes")->nullable();
             $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();
             $table->timestamps();
         });

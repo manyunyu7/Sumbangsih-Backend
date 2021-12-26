@@ -8,7 +8,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item text-muted active" aria-current="page">Kegiatan Bansos</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Edit Kegiatan</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Tambah Kegiatan</li>
                     </ol>
                 </nav>
             </div>
@@ -24,38 +24,32 @@
 @section('page-wrapper')
     @include('main.components.message')
 
-    <form action='{{ url("bansos-event/$data->id/update") }}' enctype="multipart/form-data" method="post">
+    <form action="{{ url('bansos-event/store') }}" enctype="multipart/form-data" method="post">
         @csrf
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">{{$data->name}}</h3>
+                        <h3 class="card-title">Tambah Data Kegiatan Periode Baru</h3>
 
                         <div class="form-group">
                             <label for="basicInput">Nama Kegiatan</label>
                             <input type="text" name="name" required class="form-control"
-                                   value="{{ old('name',$data->name) }}"
+                                   value="{{ old('name') }}"
                                    placeholder="Misal : Bantuan Sosial Covid-19 2021">
                         </div>
 
                         <div class="form-group">
-                            <label for="basicInput">Kuota Penerima</label>
-                            <input type="number" name="kuota" required class="form-control"
-                                   value="{{ old('kuota',$data->kuotas) }}"
-                                   placeholder="Misal : 9900">
-                        </div>
-
-                        <div class="form-group">
                             <label for="">Tanggal Mulai</label>
-                            <input type="date" value="{{$data->time_start}}"
+                            <input type="date"
                                    class="form-control" name="time_start" aria-describedby="helpId" placeholder="">
                             <small id="helpId" class="form-text text-muted">Tanggal Mulai</small>
                         </div>
 
                         <div class="form-group">
                             <label for="">Tanggal Selesai</label>
-                            <input type="date" value="{{$data->time_end}}"
+                            <input type="date"
                                    class="form-control" name="time_end" aria-describedby="helpId" placeholder="">
                             <small id="helpId" class="form-text text-muted">Tanggal Selesai</small>
                         </div>
@@ -64,9 +58,9 @@
                             <label for="">Status</label>
                             <select class="form-control" name="status" required id="">
                                 <option>Pilih Status</option>
-                                <option value="1" @if($data->status==1) selected @endif>Aktif</option>
-                                <option value="0" @if($data->status==0) selected @endif>Tidak Aktif</option>
-                                <option value="3" @if($data->status==3) selected @endif>Selesai</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak Aktif</option>
+                                <option value="3">Selesai</option>
                             </select>
                         </div>
 

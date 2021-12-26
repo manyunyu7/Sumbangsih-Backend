@@ -155,6 +155,14 @@ class PengajuanSKUController extends Controller
             $objTracking->message = "User Telah Mengajukan Permohonan BLT, Permohonan akan diteruskan ke kelurahan";
             $objTracking->save();
 
+            RazkyFeb::insertNotification(
+                $object->user_id,
+                "Pengajuan BLT",
+                "Request Pengajuan BLT Sedang Diproses ",
+                "Terima Kasih Telah Mengajukan BLT, Permintaan Anda sedang diproses, silakan cek status di menu pengajuan",
+                2
+            );
+
             return RazkyFeb::responseSuccessWithData(200, 1, 1, "Pengajuan Berhasil Dikirim", "KTP found", $object);
         } else {
             return RazkyFeb::responseErrorWithData(200, 0, 0, "Pengajuan Gagal Dilakukan", "KTP found", $object);

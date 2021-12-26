@@ -95,6 +95,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('verification', "$cr@viewVerifikasi");
     });
 
+    Route::prefix("data-fix")->group(function () {
+        $cr = "ReportMistakeController";
+        Route::get('manage', "$cr@viewManage");
+    });
+
+
+    Route::prefix("komplain")->group(function () {
+        $cr = "KomplainsController";
+        Route::get('manage', "$cr@viewManage");
+    });
+
 
     Route::prefix("ktp")->group(function () {
         $cr = "KTPController";
