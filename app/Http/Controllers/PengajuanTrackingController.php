@@ -127,10 +127,10 @@ class PengajuanTrackingController extends Controller
 
         $data->status = $savedStatus;
         $data->message = $request->message;
-        $data->updated_by = Auth::id();
+//        $data->updated_by = Auth::id();
 
         $date = RazkyFeb::IndonesianDateTimeline();
-
+        $title = "";
         switch (Auth::user()->role) {
             case 4 : // Kelurahan
                 $data->title = "Kelurahan - $date ";
@@ -184,22 +184,22 @@ class PengajuanTrackingController extends Controller
         if ($data->save()) {
             $objPengajuan->save();
 
-            if ($request->is('api/*'))
+            RazkyFeb::insertNotification(
+                $userId,
+                "Pengajuan BLT",
+                "Update Tracking",
+                "Permintaanmu telah diproses ke tahap ($title), silakan cek di menu riwayat",
+                76
+            );
 
-                RazkyFeb::insertNotification(
-                    $userId,
-                    "Pengajuan BLT",
-                    "Update Tracking",
-                    "Permintaanmu telah diproses ke tahap ($title), silakan cek di menu riwayat",
-                    76
-                );
-
+            if ($request->is('api/*')) {
                 return RazkyFeb::responseSuccessWithData(
                     200, 1, 200,
                     "Berhasil Mengupdate Data",
                     "Success",
                     $data,
                 );
+            }
 
             return back()->with(["success" => "Berhasil Mengupdate Data"]);
         } else {

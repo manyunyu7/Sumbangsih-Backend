@@ -65,7 +65,7 @@ class PengajuanSKUController extends Controller
     public function getCurrentUser(Request $request)
     {
         $id = $request->user_id;
-        $obj = PengajuanSKU::where("user_id",'=',$id)->first();
+        $obj = PengajuanSKU::where("user_id", '=', $id)->first();
         if ($obj == null) {
             return RazkyFeb::responseErrorWithData(
                 400, 0, 0, "Kegiatan BLT Tidak Ditemukan",
@@ -148,7 +148,7 @@ class PengajuanSKUController extends Controller
             $objTracking->user_id = $object->user_id;
             $objTracking->pengajuan_id = $object->id;
             $objTracking->date = $date;
-            $objTracking->updated_by = $object->user_id;
+            //  $objTracking->updated_by = $object->user_id;
             $objTracking->status = 1;
             $objTracking->role = "100";
             $objTracking->title = "User - " . RazkyFeb::IndonesianDateTimeline();

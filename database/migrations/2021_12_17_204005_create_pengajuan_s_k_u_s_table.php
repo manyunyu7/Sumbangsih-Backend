@@ -32,7 +32,6 @@ class CreatePengajuanSKUSTable extends Migration
             $table->boolean("approved_kecamatan")->nullable();
             $table->boolean("isDisbursed")->nullable();
             $table->boolean("isFinish")->nullable();
-            $table->unique(['user_id', 'event_id']);
             $table->foreign("event_id")->references("id")->on("bansos_events")->onDelete("cascade");
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();

@@ -19,7 +19,7 @@ class KTPSeeder extends Seeder
 //        YYYY-MM-DD
         for ($i = 0; $i < 300; $i++) {
             try {
-                $nik = $faker->numberBetween(000000000001, 900000000000);
+                $nik = $faker->numberBetween(2000000000000000, 9000000000000000);
                 $no_kk = $faker->numberBetween(100000000000, 190000000000);
                 $jk = $faker->numberBetween(1, 2);
                 $this->insert($faker->name, $date, $faker->state, $nik,$no_kk, $jk, $faker->address);
