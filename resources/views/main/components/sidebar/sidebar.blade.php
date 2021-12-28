@@ -10,10 +10,55 @@
                                             aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                             class="hide-menu">Dashboard</span></a></li>
 
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Verifikasi NIK</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('nik/verification') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Lihat Verifikasi
+                        </span>
+                    </a>
+                </li>
+
+
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">DATA KTP</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('pengajuan-warga/create') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Tambah KTP
+                        </span>
+                    </a>
+                </li>
+
+                <li class="list-divider"></li>
+
+                <li class="nav-small-cap"><span class="hide-menu">Customer Service</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('/cs-chat/manage') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Chat
+                            </span>
+                    </a>
+                </li>
+
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Komplain</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('komplain/manage') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Lihat Komplain
+                        </span>
+                    </a>
+                </li>
+                <li class="list-divider"></li>
 
                 <li class="nav-small-cap"><span class="hide-menu">Pengajuan BLT</span></li>
 
-                <li class="list-divider"></li>
 
                 @if(Auth::user()->role==1)
                     <li class="sidebar-item active">
@@ -56,17 +101,6 @@
                     </li>
                 @endif
 
-                <li class="list-divider"></li>
-
-                <li class="nav-small-cap"><span class="hide-menu">Customer Service</span></li>
-
-                <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('/cs-chat/manage') }}" aria-expanded="false">
-                        <i data-feather="tag" class="feather-icon"></i>
-                        <span class="hide-menu">Pesan Masuk
-                            </span>
-                    </a>
-                </li>
 
                 @if (Auth::user()->role == 1)
                     <li class="list-divider"></li>
@@ -89,17 +123,6 @@
                     </li>
 
                     <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">DATA KTP</span></li>
-
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('pengajuan-warga/create') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Tambah KTP
-                        </span>
-                        </a>
-                    </li>
-
-                    <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">Laporan Kesalahan Data</span></li>
 
                     <li class="sidebar-item active">
@@ -110,27 +133,7 @@
                         </a>
                     </li>
 
-                    <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">Komplain</span></li>
 
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('komplain/manage') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Lihat Komplain
-                        </span>
-                        </a>
-                    </li>
-
-                    <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">Verifikasi NIK</span></li>
-
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('nik/verification') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Lihat Verifikasi
-                        </span>
-                        </a>
-                    </li>
 
                     <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">DATA KTP</span></li>

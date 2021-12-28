@@ -21,6 +21,7 @@ Route::get('/landing', function () {
 Route::redirect('/', '/login');
 
 Route::view('/template/home', 'template');
+Route::view('/download/', 'download');
 
 Auth::routes();
 
